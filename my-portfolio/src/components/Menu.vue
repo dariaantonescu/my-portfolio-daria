@@ -15,7 +15,7 @@
       <!-- Navigation links (desktop) -->
       <div class="nav-links md:flex hidden">
         <a href="#projects" class="menu-link">Projects</a>
-        <a href="#art" class="menu-link">Art</a>
+        <a href="#art" class="menu-link">Art & Play</a>
         <a href="#about" class="menu-link">About</a>
         <a href="#contact" class="menu-link">Contact</a>
       </div>

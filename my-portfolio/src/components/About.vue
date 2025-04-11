@@ -1,6 +1,6 @@
 <template>
   <div class="about-container">
-    <section class="intro-section flex py-16 px-8">
+    <section class="intro-section py-16 px-8">
       <!-- Left side: text content -->
       <div class="text-content w-full md:w-1/2 pr-8 text-left">
         <p class="mt-4 text-lg text-gray-700">A little intro</p>
@@ -11,42 +11,41 @@
       </div>
 
       <!-- Right side: video and buttons -->
-        <div class="video-container w-full md:w-1/2 bg-white p-8 rounded-lg mt-8 md:mt-0">
-  <iframe
-    width="100%" height="315"
-    src="https://www.youtube.com/embed/2hTFOzZlwqU"  
-    frameborder="0"
-    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen>
-  </iframe>
-  <div class="mt-6 flex justify-center gap-4">
-  <!-- Video CV -->
-  <a href="https://www.youtube.com/embed/2hTFOzZlwqU" target="_blank">
-    <button class="bg-blue-800 text-blue-950 px-8 py-3 rounded-md w-full max-w-xs text-center">
-      Video CV
-    </button>
-  </a>
+      <div class="video-container w-full md:w-1/2 bg-white p-8 rounded-lg mt-8 md:mt-0">
+        <iframe
+          width="100%" height="315"
+          src="https://www.youtube.com/embed/2hTFOzZlwqU"
+          frameborder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+        <div class="mt-6 flex flex-col justify-center gap-4">
+          <!-- Video CV -->
+          <a href="https://www.youtube.com/embed/2hTFOzZlwqU" target="_blank">
+            <button class="bg-blue-800 text-blue-950 px-8 py-3 rounded-md w-full max-w-xs text-center">
+              Video CV
+            </button>
+          </a>
 
-  <!-- Download CV -->
-  <a href="/visuals/CV_DariaAntonescu_.pdf" download>
-    <button class="bg-gray-300 text-blue-950 px-8 py-3 rounded-md w-full max-w-xs text-center">
-      Download CV
-    </button>
-  </a>
-</div>
-
+          <!-- Download CV -->
+          <a href="/visuals/CV_DariaAntonescu_.pdf" download>
+            <button class="bg-gray-300 text-blue-950 px-8 py-3 rounded-md w-full max-w-xs text-center">
+              Download CV
+            </button>
+          </a>
+        </div>
       </div>
     </section>
 
     <!-- Competences section -->
     <section id="competences" class="competences-section mt-16">
       <div class="competences-container flex">
-        <!-- Competences Title (Sticky) -->
-        <div class="competences-title sticky top-0 w-1/4 p-8">
+        <!-- Competences Title -->
+        <div class="competences-title p-8">
           <h2 class="text-3xl font-bold text-blue-950">Competences</h2>
         </div>
 
-        <div class="competences-content w-3/4 pl-8">
+        <div class="competences-content w-full pl-8">
           <div
             v-for="(competence, index) in competences"
             :key="index"
@@ -101,15 +100,11 @@ export default {
     };
   },
   mounted() {
-    // Trigger animation when competences are in view
     const options = {
-      root: null, // use the viewport as the root
-      threshold: 0.1, // trigger when 10% of the element is visible
+      root: null,
+      threshold: 0.1,
     };
-
     const observer = new IntersectionObserver(this.handleIntersection, options);
-
-    // Observe each competence item
     this.$nextTick(() => {
       const competenceItems = this.$el.querySelectorAll('.competence-item');
       competenceItems.forEach(item => observer.observe(item));
@@ -135,8 +130,20 @@ export default {
 
 .intro-section {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: flex-start; 
+  align-items: flex-start; 
+  flex-wrap: wrap; 
+  text-align: left; 
+}
+
+.text-content {
+  max-width: 100%; 
+}
+
+.text-container p {
+  max-width: 100%; 
+  margin-top: 1rem; 
+  text-align: left; 
 }
 
 .video-container {
@@ -144,9 +151,14 @@ export default {
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 2rem;
 }
 
-/* Competences section */
+.video-container iframe {
+  width: 100%;
+  height: 315px;
+}
+
 .competences-section {
   padding: 3rem;
 }
@@ -154,16 +166,16 @@ export default {
 .competences-container {
   display: flex;
   width: 100%;
+  flex-wrap: wrap; /* Allow flex container to wrap */
 }
 
 .competences-title {
   text-align: left;
-
 }
 
 .competences-content {
+  width: 100%;
   padding-left: 3rem;
-  width: 75%;
   text-align: left;
 }
 
@@ -174,7 +186,6 @@ export default {
   transition: opacity 0.3s ease-out;
 }
 
-/* Add animation for when the competences are in view */
 @keyframes fadeInUp {
   0% {
     opacity: 0;
@@ -190,37 +201,67 @@ export default {
   animation: fadeInUp 0.8s ease-out forwards;
 }
 
-/* Media query for mobile screens */
 @media (max-width: 768px) {
   .intro-section {
-    flex-direction: column; 
-    align-items: flex-start; 
+    flex-direction: column;
+    align-items: left;
+    padding-left: 0;  /* Remove padding */
+    padding-right: 0; /* Remove padding */
+  }
+
+  .about-container {
+    padding: 0rem;
   }
 
   .video-container {
+    padding: 0rem;
     width: 100%;
-    margin-top: 2rem; /* Add some space between text and video */
+    margin-top: 2rem;
+  }
+
+  .video-container iframe {
+    width: 100%;
+    height: 315px;
   }
 
   .competences-container {
-    flex-direction: column; /* Stack competences vertically */
+    flex-direction: column;
     padding-left: 0;
   }
 
+  .competences-section {
+    padding: 0rem;
+  }
+
   .competences-title {
-    width: 100%; /* Competences title will take full width */
-    padding: 1rem; 
+    width: 100%;
+    padding: 1rem;
+    font-size: 2rem;
+    text-align: left;
+    margin-bottom: 1rem;
   }
 
   .competences-content {
-    width: 100%; 
-    padding-left: 0; 
+    width: 100%;
+    padding-left: 0;
   }
 
-  .project-text {
-    max-width: 100%; /* Ensure the project text takes full width on mobile */
+  .competence-item {
+    padding: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+    margin-bottom: 20px;
+  }
+
+  .competence-item h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .competence-item p {
+    font-size: 1rem;
+    line-height: 1.5;
   }
 }
-
 </style>
-

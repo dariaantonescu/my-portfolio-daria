@@ -77,14 +77,20 @@
     object-fit: contain;
   }
   
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .contact-info {
-      width: 100%;
-    }
-    .banana-image {
-      display: none;
-    }
+ /* Media query for mobile screens */
+@media (max-width: 768px) {
+  .contact-container {
+    background-color: transparent;
   }
-  </style>
+  
+  /* Other adjustments for mobile */
+  .contact-info {
+    width: 100%; 
+  }
+
+  .banana-image {
+    display: none; 
+  }
+}
+</style> 
   
